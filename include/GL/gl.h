@@ -6,6 +6,8 @@
 
 #define GL_VERSION_1_1 1
 
+#include "vgl.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

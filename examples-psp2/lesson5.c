@@ -2,66 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
 #include <GL/gl.h>
-#include <zbuffer.h>
 
 #include <psp2/kernel/processmgr.h>
 #include <psp2shell.h>
-#include <vita2d.h>
 
 #define SCR_W 960
 #define SCR_H 544
 
 #define printf psp2shell_print
-
-typedef struct {
-	ZBuffer *frameBuffer;
-	vita2d_texture *texture;
-	void *data;
-	int w, h;
-	unsigned int pitch;
-	int	mode;
-} GLScreen;
-
-GLScreen *screen;
-
-void gluPerspective( GLdouble fovY, GLdouble aspect, GLdouble zNear, GLdouble zFar ) {
-		
-	const GLdouble pi = 3.1415926535897932384626433832795;
-	GLdouble fW, fH;
-	fH = tan( fovY / 360 * pi ) * zNear;
-	fW = fH * aspect;
-	glFrustum( -fW, fW, -fH, fH, zNear, zFar );
-}
-
-void glInitVita() {
-	
-	screen = (GLScreen*) malloc(sizeof(*screen));
-	memset(screen, 0, sizeof(GLScreen));
-	
-	vita2d_init();
-	vita2d_set_clear_color(RGBA8(0xFF, 0xFF, 0xFF, 0xFF));
-	
-	screen->texture = vita2d_create_empty_texture_format(SCR_W, SCR_H, SCE_GXM_TEXTURE_FORMAT_R5G6B5);
-	screen->data = vita2d_texture_get_datap(screen->texture);
-	screen->w = SCR_W;
-	screen->h = SCR_H;
-	screen->pitch = screen->w * 2;
-	screen->mode = ZB_MODE_5R6G5B;
-
-    screen->frameBuffer = ZB_open( screen->w, screen->h, screen->mode, 0, 0, 0, 0);
-    glInit( screen->frameBuffer );
-}
-
-void glSwapVita() {
-	
-	ZB_copyFrameBuffer(screen->frameBuffer, screen->data, screen->pitch);
-	vita2d_start_drawing();
-	vita2d_draw_texture(screen->texture, 0, 0);
-	vita2d_end_drawing();
-	vita2d_swap_buffers();
-}
 
 /* rotation angle for the triangle. */
 float rtri = 0.0f;
@@ -203,14 +152,14 @@ void DrawGLScene()
   rquad-=15.0f;					// Decrease The Rotation Variable For The Cube
 
   // swap the buffers to display, since double buffering is used.
-  glSwapVita();
+  vglSwap();
 }
 
 int main(int argc, char **argv) {
 	
 	psp2shell_init(3333);
 	
-	glInitVita();
+	vglInit();
 
     InitGL(SCR_W, SCR_H);
     
@@ -218,8 +167,7 @@ int main(int argc, char **argv) {
 		DrawGLScene();
 	}
     
-    // cleanup:
-    ZB_close(screen->frameBuffer);
+	vglClose();
     psp2shell_exit();
     sceKernelExitProcess(0);
     
