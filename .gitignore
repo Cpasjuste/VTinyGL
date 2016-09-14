@@ -35,3 +35,8 @@
 *.dSYM/
 *.su
 
+# Vita
+*.velf
+*.vpk
+eboot.bin
+param.sfo

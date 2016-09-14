@@ -626,6 +626,8 @@ glPolygonOffset(GLfloat factor, GLfloat units)
   p[0].op = OP_PolygonOffset;
   p[1].f = factor;
   p[2].f = units;
+  
+  gl_add_op(p);
 }
 
 /* Special Functions */

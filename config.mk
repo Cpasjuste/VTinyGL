@@ -2,8 +2,9 @@
 # C compiler
 
 # linux
-CC= gcc
-CFLAGS= -g -Wall -O2
+CC= arm-vita-eabi-gcc
+CFLAGS= -Wl,-q -g -Wall -O2 -ftree-vectorize -mword-relocations -fomit-frame-pointer -ffast-math \
+		-march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard
 LFLAGS=
 
 # for BeOS PPC
@@ -18,7 +19,7 @@ LFLAGS=
 # Select window API for TinyGL: 
 
 # standard X11 GLX like API 
-TINYGL_USE_GLX=y
+#TINYGL_USE_GLX=y
 
 # BEOS API
 #TINYGL_USE_BEOS=y
@@ -75,7 +76,8 @@ GL_DEPS= ../lib/libTinyGL.a
 # Compile and link control
 
 # UNIX systems
-DIRS= src examples
+DIRS= src
+#examples-psp2
 
 # BeOS
 # DIRS= src BeOS
