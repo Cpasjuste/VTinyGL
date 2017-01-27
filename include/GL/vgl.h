@@ -10,6 +10,7 @@ extern "C" {
 void vglInit();
 void vglSwap();
 void vglClose();
+void * vglGetFramebuffer();
 
 // helper
 void gluPerspective( GLdouble fovY, GLdouble aspect, GLdouble zNear, GLdouble zFar );

@@ -69,3 +69,7 @@ void vglClose() {
 	free(vScreen);
 	vita2d_fini();
 }
+
+void * vglGetFramebuffer() {
+    return (void *) vScreen->frameBuffer->pbuf;
+}
