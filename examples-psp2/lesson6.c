@@ -234,7 +234,7 @@ void DrawGLScene()
 
 int main(int argc, char **argv) {
 	
-	psp2shell_init(3333);
+	psp2shell_init(3333, 0);
 	
 	vglInit();
 

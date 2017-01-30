@@ -4,6 +4,7 @@
 #include <math.h>
 #include <GL/gl.h>
 
+#include <sys/time.h>
 #include <psp2/kernel/processmgr.h>
 #include <psp2shell.h>
 
@@ -11,6 +12,19 @@
 #define SCR_H 544
 
 #define printf psp2shell_print
+
+/* frame counter */
+struct timeval start;
+void StartTicks(void) {
+    gettimeofday(&start, NULL);
+}
+unsigned int GetTicks(void) {
+    unsigned int ticks;
+    struct timeval now;
+    gettimeofday(&now, NULL);
+    ticks = (unsigned int) ((now.tv_sec) * 1000 + (now.tv_usec) / 1000);
+    return ticks;
+}
 
 /* rotation angle for the triangle. */
 float rtri = 0.0f;
@@ -157,14 +171,28 @@ void DrawGLScene()
 
 int main(int argc, char **argv) {
 	
-	psp2shell_init(3333);
+	psp2shell_init(3333, 0);
 	
 	vglInit();
 
     InitGL(SCR_W, SCR_H);
     
+    StartTicks();
+    uint32_t fps_lasttime = GetTicks();
+	uint32_t fps_current;
+	uint32_t fps_frames = 0;
+    
     while(1) {
+		
 		DrawGLScene();
+		
+		fps_frames++;
+		if (fps_lasttime < GetTicks() - (5*1000)) {
+			fps_lasttime = GetTicks();
+			fps_current = fps_frames;
+			fps_frames = 0;
+			printf("FPS: %i\n", fps_current/5);
+		} 
 	}
     
 	vglClose();

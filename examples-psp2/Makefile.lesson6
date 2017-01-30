@@ -2,9 +2,12 @@ TITLE_ID = TinyGLL06
 TARGET   = TinyGLL06
 OBJS     = lesson6.o
 
-LIBS = ../lib/libTinyGL.a -lvita2d -lpsp2shell -lpthread -lSceDisplay_stub -lSceGxm_stub \
-	-lSceSysmodule_stub -lSceCtrl_stub -lScePgf_stub -lSceNetCtl_stub -lSceNet_stub -lScePower_stub \
-	-lSceKernel_stub -lSceCommonDialog_stub -lSceAudio_stub -lSceAppMgr_stub -lfreetype -lpng -ljpeg -lz -lm -lc
+LIBS = ../lib/libTinyGL.a -lpsp2shell -lvita2d \
+		-lSceDisplay_stub -lSceGxm_stub -lSceSysmodule_stub \
+        -lSceCtrl_stub -lScePgf_stub -lSceNetCtl_stub \
+        -lSceNet_stub -lScePower_stub -lSceCommonDialog_stub \
+        -lSceAudio_stub -lSceAppMgr_stub \
+        -lpng -ljpeg -lz -lm -lc
 
 PREFIX  = arm-vita-eabi
 CC      = $(PREFIX)-gcc
@@ -20,7 +23,7 @@ all: $(TARGET).vpk
 	vita-pack-vpk -s param.sfo -b eboot.bin $@
 
 eboot.bin: $(TARGET).velf
-	vita-make-fself -s $< $@
+	vita-make-fself -c $< $@
 
 %.velf: %.elf
 	vita-elf-create $< $@

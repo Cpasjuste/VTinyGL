@@ -20,10 +20,12 @@ all: $(LIB)
 $(LIB): $(OBJS)
 	rm -f $(LIB)
 	ar rcs $(LIB) $(OBJS)
+	mkdir ../lib
 	cp $(LIB) ../lib
 
 clean:
 	rm -f *~ *.o *.a
+	rm -rf ../lib
 
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDES) -c $*.c

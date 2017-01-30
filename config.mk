@@ -3,8 +3,11 @@
 
 # linux
 CC= arm-vita-eabi-gcc
-CFLAGS= -Wl,-q -g -Wall -O2 -ftree-vectorize -mword-relocations -fomit-frame-pointer -ffast-math \
-		-march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard
+CFLAGS= -Wl,-q -g -Wall -O3 \
+		-ftree-vectorize -mword-relocations \
+		-fomit-frame-pointer -ffast-math \
+		-march=armv7-a -mtune=cortex-a9 \
+		-mfpu=neon -mfloat-abi=hard
 LFLAGS=
 
 # for BeOS PPC

@@ -1,4 +1,5 @@
 #include "zgl.h"
+#include <string.h>
 #include <stdio.h>
 /* glVertex */
 
@@ -699,7 +700,6 @@ void gluLookAt(GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble centerx,
      GLdouble centery, GLdouble centerz, GLdouble upx, GLdouble upy,
      GLdouble upz)
 {
-  int i;
   float forward[3], side[3], up[3];
   GLfloat m[4][4];
 
