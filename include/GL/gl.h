@@ -809,7 +809,7 @@ void glTexCoordPointer(GLint size, GLenum type, GLsizei stride,
 void glPolygonOffset(GLfloat factor, GLfloat units);
 
 /* not implemented, just added to compile  */
-  /*
+/*
 inline void glPointSize(float) {}
 inline void glLineWidth(float) {}
 inline void glDeleteLists(int, int) {}
@@ -825,13 +825,17 @@ inline void glFogf(int, float) {}
 inline void glRasterPos2f(float, float) {}
 inline void glPolygonStipple(void*) {}
 inline void glTexParameterf(int, int, int) {};
-  */
+*/
 /* non compatible functions */
 
 void glDebug(int mode);
 
 void glInit(void *zbuffer);
 void glClose(void);
+
+void gluLookAt(GLdouble eyex, GLdouble eyey, GLdouble eyez, GLdouble centerx,
+     GLdouble centery, GLdouble centerz, GLdouble upx, GLdouble upy,
+     GLdouble upz);
 
 #ifdef __cplusplus
 }
