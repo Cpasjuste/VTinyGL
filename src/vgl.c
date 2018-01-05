@@ -14,7 +14,6 @@
 typedef struct {
 	ZBuffer *frameBuffer;
 	vita2d_texture *texture;
-	void *data;
 	int w, h;
 	unsigned int pitch;
 	int	mode;
@@ -46,7 +45,6 @@ void vglInit() {
 	// vita2d_set_vblank_wait(0); // for speed testing
 
 	vScreen->texture = vita2d_create_empty_texture_format(SCR_W, SCR_H, SCE_GXM_TEXTURE_FORMAT_R5G6B5);
-	vScreen->data = vita2d_texture_get_datap(vScreen->texture);
 	vScreen->w = SCR_W;
 	vScreen->h = SCR_H;
 	vScreen->pitch = vScreen->w * 2;
@@ -55,7 +53,7 @@ void vglInit() {
     vScreen->frameBuffer = ZB_open( vScreen->w, vScreen->h, vScreen->mode, 0, 0, 0, 0);
     // map vita2d texture buffer to gl buffer for direct access
     gl_free(vScreen->frameBuffer->pbuf);
-    vScreen->frameBuffer->pbuf = vScreen->data;
+    vScreen->frameBuffer->pbuf = vita2d_texture_get_datap(vScreen->texture);
     
     glInit( vScreen->frameBuffer );
 }

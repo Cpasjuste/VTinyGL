@@ -5,12 +5,11 @@
 #include <GL/gl.h>
 
 #include <psp2/kernel/processmgr.h>
-#include <psp2shell.h>
 
 #define SCR_W 960
 #define SCR_H 544
 
-#define printf psp2shell_print
+#define printf sceClibPrintf
 
 /* rotation angle for the triangle. */
 float rtri = 0.0f;
@@ -92,8 +91,6 @@ void DrawGLScene()
 
 int main(int argc, char **argv) {
 	
-	psp2shell_init(3333, 0);
-	
 	vglInit();
 
     InitGL(SCR_W, SCR_H);
@@ -103,7 +100,6 @@ int main(int argc, char **argv) {
 	}
     
     vglClose();
-    psp2shell_exit();
     sceKernelExitProcess(0);
     
     return 0;

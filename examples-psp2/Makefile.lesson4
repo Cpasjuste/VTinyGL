@@ -2,7 +2,7 @@ TITLE_ID = TinyGLL04
 TARGET   = TinyGLL04
 OBJS     = lesson4.o
 
-LIBS = ../lib/libTinyGL.a -lpsp2shell -lvita2d \
+LIBS = ../lib/libTinyGL.a -lvita2d \
 		-lSceDisplay_stub -lSceGxm_stub -lSceSysmodule_stub \
         -lSceCtrl_stub -lScePgf_stub -lSceNetCtl_stub \
         -lSceNet_stub -lScePower_stub -lSceCommonDialog_stub \
